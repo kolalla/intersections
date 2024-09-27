@@ -1,0 +1,31 @@
+aerial object detection datasets
+DOTA - https://captain-whu.github.io/DOTA/dataset.html
+xView - http://xviewdataset.org/ -- https://www.kaggle.com/datasets/ollypowell/xview-yolo-dataset
+
+https://www.kaggle.com/datasets/kailaspsudheer/tiny-object-detection
+Fair1m - https://www.kaggle.com/datasets/ollypowell/fair1m-satellite-imagery-for-object-detection
+
+semantic segmentation aerial datasets
+skyscrapes - https://eoc-datasets.dlr.de/
+https://www.dlr.de/en/eoc/about-us/remote-sensing-technology-institute/photogrammetry-and-image-analysis/public-datasets/hd-maps
+
+Deepglobe - https://www.kaggle.com/datasets/balraj98/deepglobe-road-extraction-dataset
+
+Mapillary - https://www.mapillary.com/dataset/vistas
+
+robosat - https://github.com/mapbox/robosat
+
+OSM - https://github.com/geometalab/OSMDeepOD
+
+
+Mass Roads - https://gis.data.mass.gov/datasets/massgis-massdot-roads/explore
+SpaceNet - https://spacenet.ai/datasets/
+
+https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery
+
+other CV datasets
+https://github.com/chrieke/awesome-satellite-imagery-datasets?tab=readme-ov-file
+
+
+GUIDANCE
+https://medium.com/@robmarkcole/a-brief-introduction-to-satellite-image-segmentation-with-neural-networks-33ea732d5bce

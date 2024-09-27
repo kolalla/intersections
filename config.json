@@ -1,0 +1,6 @@
+{
+    "rev_geocode_intersections": {
+        "starting_file": "data/processed/collisions_ped_cyc.csv",
+        "num_records_to_process": 1500
+    }
+}
