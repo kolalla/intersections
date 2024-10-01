@@ -77,15 +77,15 @@ df = pd.read_csv(REFERENCE_FILE, low_memory=False)
 coords = df[['LATITUDE', 'LONGITUDE']].values.tolist()
 
 # Load previously processed coordinates (if any)
-previously_processed = os.path.isfile('data/processed/intersection_flags.csv')
+previously_processed = os.path.isfile('data/reference/intersection_flags.csv')
 
 if previously_processed:
-    previously_processed = pd.read_csv('data/processed/intersection_flags.csv')
+    previously_processed = pd.read_csv('data/reference/intersection_flags.csv')
     previously_processed = previously_processed[~pd.isna(previously_processed['data'])]
     processed_coords = [tuple(coord) for coord in previously_processed[['lat', 'lng']].values.tolist()]
 else:
     df_template = pd.DataFrame(columns=['lat', 'lng', 'intersection', 'data'])
-    df_template.to_csv('data/processed/intersection_flags.csv', index=False, header=True)
+    df_template.to_csv('data/reference/intersection_flags.csv', index=False, header=True)
     processed_coords = []
 
 # Filter out already processed coordinates
@@ -103,7 +103,7 @@ if coords_to_process:
         # Write results to file
         if i % 100 == 0:
             results_df = pd.DataFrame(results, columns=['lat', 'lng', 'intersection', 'data'])
-            results_df.to_csv('data/processed/intersection_flags.csv', index=False, header=False, mode='a')
+            results_df.to_csv('data/reference/intersection_flags.csv', index=False, header=False, mode='a')
             results = []
         # Print progress
         if i % 1000 == 0:
@@ -111,7 +111,7 @@ if coords_to_process:
     # Write remaining results to file
     if results:
         results_df = pd.DataFrame(results, columns=['lat', 'lng', 'intersection', 'data'])
-        results_df.to_csv('data/processed/intersection_flags.csv', index=False, header=False, mode='a')
+        results_df.to_csv('data/reference/intersection_flags.csv', index=False, header=False, mode='a')
 else:
     print("All coordinates have already been processed.")
 
@@ -130,10 +130,10 @@ else:
 #     coords = df[['LATITUDE', 'LONGITUDE']].values.tolist()
 
 #     # Load previously processed coordinates (if any)
-#     previously_processed = os.path.isfile('data/processed/intersection_flags.csv')
+#     previously_processed = os.path.isfile('data/reference/intersection_flags.csv')
     
 #     if previously_processed:
-#         previously_processed = pd.read_csv('data/processed/intersection_flags.csv')
+#         previously_processed = pd.read_csv('data/reference/intersection_flags.csv')
 #         previously_processed = previously_processed[~pd.isna(previously_processed['data'])]
 #         processed_coords = [tuple(coord) for coord in previously_processed[['lat', 'lng']].values.tolist()]
 #         add_header = False
@@ -153,7 +153,7 @@ else:
 #         results_df = pd.DataFrame(results, columns=['lat', 'lng', 'intersection', 'data'])
 
 #         # OUTPUT
-#         results_df.to_csv('data/processed/intersection_flags.csv', index=False, header=add_header, mode='a')
+#         results_df.to_csv('data/reference/intersection_flags.csv', index=False, header=add_header, mode='a')
     
 #     else:
 #         print("All coordinates have already been processed.")
