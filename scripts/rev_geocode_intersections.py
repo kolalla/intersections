@@ -42,35 +42,36 @@ def check_for_intersection(coords, distance_threshold=0.02, api_key=geonames_use
         try:
             response = requests.get(url)
             response.raise_for_status()
+        
+            if response.status_code == 200:
+                # Process the response
+                data = response.json()
+                
+                # Check for limit exceeded message
+                if 'status' in data and data['status']['message'].startswith('the hourly limit'):
+                    print(f"Hourly limit exceeded: {data['status']['message']}")
+                    wait_until_next_hour()  # Wait for an hour before retrying
+                    continue  # Retry the same request after the wait
+                
+                # Check for intersection
+                if 'intersection' in data:
+                    if float(data['intersection']['distance']) <= distance_threshold:
+                        # Return true if intersection within the threshold
+                        return coords[0], coords[1], True, data['intersection']
+                    else:
+                        # Return false if intersection not within the threshold
+                        return coords[0], coords[1], False, data['intersection']
+            
+            # Return false / None if no data found
+            return coords[0], coords[1], False, None
+        
         except (requests.exceptions.ConnectionError, requests.exceptions.HTTPError) as e:
             if attempt >= max_attempts:
                 print(f"Maximum number of attempts reached for {coords}.")
                 return coords[0], coords[1], False, None
-            print(f"Error encountered: {e}. Retrying in {backoff_factor * (2 ** attempt)} seconds...")
+            print(f"Error encountered: {e}. Retrying in {backoff_factor * (4 ** attempt)} seconds...")
             time.sleep(backoff_factor * (2 ** attempt))  # Exponential backoff
             attempt += 1
-        
-        if response.status_code == 200:
-            # Process the response
-            data = response.json()
-            
-            # Check for limit exceeded message
-            if 'status' in data and data['status']['message'].startswith('the hourly limit'):
-                print(f"Hourly limit exceeded: {data['status']['message']}")
-                wait_until_next_hour()  # Wait for an hour before retrying
-                continue  # Retry the same request after the wait
-            
-            # Check for intersection
-            if 'intersection' in data:
-                if float(data['intersection']['distance']) <= distance_threshold:
-                    # Return true if intersection within the threshold
-                    return coords[0], coords[1], True, data['intersection']
-                else:
-                    # Return false if intersection not within the threshold
-                    return coords[0], coords[1], False, data['intersection']
-        
-        # Return false / None if no data found
-        return coords[0], coords[1], False, None
 
 # DATA
 df = pd.read_csv(REFERENCE_FILE, low_memory=False)
