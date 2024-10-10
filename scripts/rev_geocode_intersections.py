@@ -23,7 +23,7 @@ def wait_until_next_hour():
     now = datetime.now()
     
     # Calculate the next hour
-    next_hour = (now + timedelta(hours=1)).replace(minute=5, second=0, microsecond=0)
+    next_hour = (now + timedelta(hours=1)).replace(minute=10, second=0, microsecond=0)
     
     # Calculate the sleep duration in seconds
     sleep_duration = (next_hour - now).total_seconds()
@@ -93,6 +93,7 @@ else:
 coords_to_process = list(set([tuple(coord) for coord in coords if tuple(coord) not in processed_coords]))
 if NUM_RECORDS_TO_PROCESS:
     coords_to_process = coords_to_process[0:NUM_RECORDS_TO_PROCESS]
+print(f'Processing {len(coords_to_process)} total records...')
 
 # RUN
 if coords_to_process:
