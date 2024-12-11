@@ -1,0 +1,2 @@
+trial_id,base_lr,max_iter,batch_size_per_image,ims_per_batch,augmentation,avg_accuracy,mAP,AP50,ap_AP-intersection,ap_AP-crosswalk,ap_AP-median,ap_AP-doubleYellow,ap_AP-bikeLane,ap_AP-bikeLaneInt,ap_AP-overpass,ap_AP-busLane
+0,0.0008151048360318264,892,17,7,True,0.6194320330929686,19.82178384620765,33.26425344827912,55.03970856424614,63.745274977234104,7.220147705158608,5.447314572769941,5.781568426453264,0.4150227052780467,17.425742574257423,3.4994912442636834

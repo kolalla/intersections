@@ -2,5 +2,69 @@
     "rev_geocode_intersections": {
         "starting_file": "data/processed/collisions_all.csv",
         "num_records_to_process": false
+    },
+    "get_google_images": {
+        "starting_file": "data/processed/int_flags_deduped.csv",
+        "num_records_to_process": false,
+        "check_for_errors": false
+    },
+    "training": {
+      "images_dir": "data/images",
+      "annotations_dir": "data/annotations",
+      "models_dir": "models",
+      "output_split_file": "data/split_mapping.json",
+      "excluded_classes": ["lane", "laneSeparator", "parkingLane", "overhead", "road"],
+      "ratios": [0.8, 0.2, 0.0]
+    },
+    "hyperparameters": {
+        "num_workers": 12,
+        "base_lr": 0.0025,
+        "max_iter": 3000,
+        "batch_size_per_image": 64,
+        "ims_per_batch": 16,
+        "data_augmentation": true
+    },
+    "hp_space": {
+        "base_lr": {
+            "min": 0.001,
+            "max": 0.01,
+            "log": true
+          },
+          "max_iter": {
+            "min": 100,
+            "max": 1000
+          },
+          "batch_size_per_image": {
+            "min": 16,
+            "max": 64
+          },
+          "ims_per_batch": {
+            "min": 2,
+            "max": 16
+          }
+    },
+    "inference": {
+        "model_dir": "models",
+        "model_name": "model_final.pth",
+        "images_dir": "data/images",
+        "annotations_dir": "data/annotations",
+        "num_images_to_process": false,
+        "output_dir": "data/processed",
+        "preidctions_dir": "data/predictions",
+        "threshold": 0.7,
+        "class_thresholds": {
+          "0": 0.8,
+          "1": 0.9,
+          "2": 0.7,
+          "3": 0.8,
+          "4": 0.7,
+          "5": 0.9,
+          "6": 0.7,
+          "7": 0.6
+        },
+        "polygon_eps_start": 0.02,
+        "polygon_eps_step": 0.005, 
+        "polygon_max_iter": 20,
+        "cw_distance_threshold": 10
     }
 }

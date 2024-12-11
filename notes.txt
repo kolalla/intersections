@@ -29,3 +29,24 @@ https://github.com/chrieke/awesome-satellite-imagery-datasets?tab=readme-ov-file
 
 GUIDANCE
 https://medium.com/@robmarkcole/a-brief-introduction-to-satellite-image-segmentation-with-neural-networks-33ea732d5bce
+
+
+
+LABELME
+
+labelme data/images --output data/annotations --labels data/reference/labels.txt
+
+
+UP NEXT
+DONE assign lanes and such to int?
+-evaluation based on feature outcomes
+-annotations and error analysis
+-normalize accident frequency on traffic data
+-stats modeling
+-writing
+
+
+IMAGES TO ANNOTATE
+40.823958_-73.877136
+40.618772_-74.123391
+40.666_-73.816474

@@ -1,0 +1,2 @@
+trial_id,base_lr,max_iter,batch_size_per_image,ims_per_batch,mAP,AP50,ap_AP-intersection,ap_AP-crosswalk,ap_AP-parkingLane,ap_AP-overhead,ap_AP-median,ap_AP-doubleYellow,ap_AP-bikeLane
+0,0.00046263749758854454,257,111,12,15.513201320132012,26.897689768976896,0.0,35.34653465346535,0.0,26.706270627062707,,,
