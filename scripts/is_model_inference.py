@@ -3,8 +3,9 @@ import pandas as pd
 import json
 import cv2
 import os
-import time
 import torch
+import time
+from datetime import datetime
 from scipy.spatial import Delaunay, ConvexHull
 from pycocotools import mask as mask_util
 
@@ -35,7 +36,7 @@ CW_DISTANCE_THRESHOLD = config['cw_distance_threshold']
 # Core Functions
 def setup_predictor(
         model_file_path, num_classes, threshold=0.7, 
-        class_thresholds={0: 0.8, 1: 0.9, 2: 0.7, 3: 0.8, 4: 0.7, 5: 0.9, 6: 0.7, 7: 0.6}
+        class_thresholds={0: 0.7, 1: 0.6, 2: 0.8, 3: 0.4, 4: 0.9, 5: 0.4, 6: 0.7, 7: 0.7}
     ): 
     '''
     Setup the predictor
@@ -749,15 +750,15 @@ def visualize_all_in_grid(img_file_path, predictor, metadata, dataset_dicts, cla
 
     # Add images to the grid
     axs[0, 0].imshow(img_annotations) # img_predictions
-    axs[0, 0].set_title('Model Predictions')
+    axs[0, 0].set_title('Manual Annotations')
     axs[0, 0].axis('off')
 
     axs[0, 1].imshow(img_predictions) # img_intersection
-    axs[0, 1].set_title('Intersection Sides')
+    axs[0, 1].set_title('Model Predictions')
     axs[0, 1].axis('off')
 
     axs[1, 0].imshow(img_intersection) # img_crosswalk_directions
-    axs[1, 0].set_title('Crosswalk Directions')
+    axs[1, 0].set_title('Intersection Dimensions')
     axs[1, 0].axis('off')
 
     axs[1, 1].imshow(img_crosswalk_measurements)
@@ -782,7 +783,12 @@ def visualize_annotations_predictions_grid(image_file_path, predictor, metadata,
     import matplotlib.pyplot as plt
 
     # Generate visualizations
-    img_annotations = visualize_annotations(image_file_path, metadata, dataset_dicts, plot=False)
+    if dataset_dicts:
+        img_annotations = visualize_annotations(image_file_path, metadata, dataset_dicts, plot=False)
+    else:
+        img = cv2.imread(image_file_path)
+        img_annotations = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # img_annotations = visualize_annotations(image_file_path, metadata, dataset_dicts, plot=False)
     img_predictions = visualize_model_predictions(predictor, image_file_path, metadata, plot=False)
 
     # Create a 2x2 grid
@@ -896,5 +902,5 @@ if __name__ == '__main__':
     
     # Save results to a DataFrame
     df = pd.DataFrame(all_features)
-    output_file = os.path.join(OUTPUT_DIR, 'image_features.csv')
+    output_file = os.path.join(OUTPUT_DIR, f'image_features_{datetime.now().strftime("%m.%d_%H.%M")}.csv')
     df.to_csv(output_file, index=False)

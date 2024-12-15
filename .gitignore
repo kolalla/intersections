@@ -6,6 +6,7 @@ data/*
 !data/reference/
 *.DS_Store
 models/
+detectron2/
 
 ###################
 ## From template ##
