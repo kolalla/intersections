@@ -19,7 +19,7 @@
     "hyperparameters": {
         "num_workers": 12,
         "base_lr": 0.0025,
-        "max_iter": 3000,
+        "max_iter": 4000,
         "batch_size_per_image": 64,
         "ims_per_batch": 16,
         "data_augmentation": true
