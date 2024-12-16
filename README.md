@@ -7,24 +7,24 @@ This repo provides the implementation of data collection and cleaning, model tra
 
 The scripts are organized as follows.  
 
-• `rev_geocode_intersections.py` - Takes a unique list of latitude / longitude pairs from NYPD collision data and performs reverse geocoding using the GeoNames API. It used the `findNearestIntersection` call to associate latitude / longitude pairs with distinct intersections.
-• `get_google_images.py` - Takes de-duped list of ~27,000 intersections and queries images from the Google Static Maps API. Images that were not previously queried or returned error messages (i.e., "Image not available") can be re-run.
-• `train_is_model.py` - Prepares data and trains the instance segmentation model. Hyperparameters can be controlled via `config.json`.
-• `hp_tuning.py` - Performs hyperparameter tuning to optimize training. Focus is on learning rate, batch size and max iterations.
-• `is_model_inference.py` - Implements the feature extraction pipeline to take raw model predictions and generate specific measurements of intersection characteristics. Functions are modular and implemented in other scripts (namely `5_error_analysis.ipynb`).
+• `rev_geocode_intersections.py` - Takes a unique list of latitude / longitude pairs from NYPD collision data and performs reverse geocoding using the GeoNames API. It used the `findNearestIntersection` call to associate latitude / longitude pairs with distinct intersections.  
+• `get_google_images.py` - Takes de-duped list of ~27,000 intersections and queries images from the Google Static Maps API. Images that were not previously queried or returned error messages (i.e., "Image not available") can be re-run.  
+• `train_is_model.py` - Prepares data and trains the instance segmentation model. Hyperparameters can be controlled via `config.json`.  
+• `hp_tuning.py` - Performs hyperparameter tuning to optimize training. Focus is on learning rate, batch size and max iterations.  
+• `is_model_inference.py` - Implements the feature extraction pipeline to take raw model predictions and generate specific measurements of intersection characteristics. Functions are modular and implemented in other scripts (namely `5_error_analysis.ipynb`).  
 
 For these scripts, key inputs are controlled via `config.json`
 
 The notebooks primarily provide plots, visualizations, and iterative tests to explore data, analyze errors and tune models. The only two required for replication are the following:
 
-• `1_intersections_deduping.ipynb` - Using the raw collision data from NYPD and coordinate pairs obtained from `rev_geocode_intersections.py`, this notebook takes the collision-level data and aggregates it at the intersection level. Over 1.6 million collisions are collected into ~27,000 intersections, and unique identifier based on latitude / longitude is created.
-• `7_model_diagnostic.ipynb` - Performs the final fitting of ordinal regression models using discretized, adjusted collision rates. Implements diagnostics, sensitivity analysis and stability testing to assess model robustness.
+• `1_intersections_deduping.ipynb` - Using the raw collision data from NYPD and coordinate pairs obtained from `rev_geocode_intersections.py`, this notebook takes the collision-level data and aggregates it at the intersection level. Over 1.6 million collisions are collected into ~27,000 intersections, and unique identifier based on latitude / longitude is created.  
+• `7_model_diagnostic.ipynb` - Performs the final fitting of ordinal regression models using discretized, adjusted collision rates. Implements diagnostics, sensitivity analysis and stability testing to assess model robustness.  
 
 Beyond that, the other notebooks serves secondary purposes, but are not strictly required for replication.
 
-• `0_collisions_cleaning.ipynb` - Initial EDA and cleaning of NYPD collision data.
-• `2_merging_int_coll.ipynb` - Merges the de-duped intersection list with additional features from the NYPD collision data.
-• `3_is_feature_extraction.ipynb` - Testing notebook for feature extraction functions that are ultimately refined for the pipeline in `is_model_inference.py`.
-• `4_sampling.ipynb` - Performs targeted samples of images for annotation to support training of the instance segmentation model.
-• `5_error_analysis.ipynb` - Constructs visualizations of model annotations versus predictions to assess patterns in model errors.
-• `6_feature_eda.ipynb` - Initial creation of explanatory variables and fitting of regression models for final conclusions. Leads to choices are final ordinal regression models, implemented in `7_model_diagnostic.ipynb`.
+• `0_collisions_cleaning.ipynb` - Initial EDA and cleaning of NYPD collision data.  
+• `2_merging_int_coll.ipynb` - Merges the de-duped intersection list with additional features from the NYPD collision data.  
+• `3_is_feature_extraction.ipynb` - Testing notebook for feature extraction functions that are ultimately refined for the pipeline in `is_model_inference.py`.  
+• `4_sampling.ipynb` - Performs targeted samples of images for annotation to support training of the instance segmentation model.  
+• `5_error_analysis.ipynb` - Constructs visualizations of model annotations versus predictions to assess patterns in model errors.  
+• `6_feature_eda.ipynb` - Initial creation of explanatory variables and fitting of regression models for final conclusions. Leads to choices are final ordinal regression models, implemented in `7_model_diagnostic.ipynb`.  
