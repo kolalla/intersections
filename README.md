@@ -1,10 +1,9 @@
-# intersections
-Research on pedestrian and cyclist safety at NYC intersections using computer vision
-
+# Assessing Intersection Safety in New York City Using Computer Vision
 This repo provides the implementation of data collection and cleaning, model training and tuning and final inference for the thesis paper "Assessing Intersection Safety in New York City Using Computer Vision," by Keith Colella. The paper was written for completion of CUNY'S Masters in Data Science Program. The abstract is shown below.
 
 *<div align="center">This research examines how physical infrastructure affects pedestrian and cyclist safety at more than 27,000 intersections in New York City. A fine-tuned Mask R-CNN model extracts infrastructure features from Google Maps imagery. These features are used in ordinal regression models to analyze NYPD collision data. Results show a significant positive effect of intersection complexity on collision frequency for both cyclists (\beta = 2.882, p < 0.001) and pedestrians (\beta = 4.117, p < 0.001). Specialized infrastructure like bike lanes and crosswalks correlate positively with their respective accident types, but this correlation likely reflects the influence of these features on route choice rather than safety. The impact of complexity on collision frequency decreases with appropriate lane markings, as indicated by significant negative interaction terms in both cyclist (\beta = -3.869, p < 0.001) and pedestrian (\beta = -4.508, p < 0.001) models. These findings suggest that strategic placement of specialized infrastructure away from large, complex intersections could improve traffic safety outcomes.</div>*  
 
+### Scripts  
 The scripts are organized as follows.  
 
 • `rev_geocode_intersections.py` - Takes a unique list of latitude / longitude pairs from NYPD collision data and performs reverse geocoding using the GeoNames API. It used the `findNearestIntersection` call to associate latitude / longitude pairs with distinct intersections.  
@@ -15,6 +14,7 @@ The scripts are organized as follows.
 
 For these scripts, key inputs are controlled via `config.json`
 
+### Notebooks  
 The notebooks primarily provide plots, visualizations, and iterative tests to explore data, analyze errors and tune models. The only two required for replication are the following:
 
 • `1_intersections_deduping.ipynb` - Using the raw collision data from NYPD and coordinate pairs obtained from `rev_geocode_intersections.py`, this notebook takes the collision-level data and aggregates it at the intersection level. Over 1.6 million collisions are collected into ~27,000 intersections, and unique identifier based on latitude / longitude is created.  
