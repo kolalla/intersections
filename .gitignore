@@ -4,6 +4,8 @@
 
 data/*
 !data/reference/
+!data/annotations/
+*_*.json
 *.DS_Store
 models/
 detectron2/
